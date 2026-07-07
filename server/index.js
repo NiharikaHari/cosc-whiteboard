@@ -10,7 +10,11 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 const httpServer = createServer(app);
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+  cors: {
+    origin: process.env.CLIENT_ORIGIN,
+  },
+});
 
 if (process.env.NODE_ENV === 'production') {
   const clientDist = path.join(__dirname, '../client/dist');
